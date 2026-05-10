@@ -1,0 +1,32 @@
+name: Copy and Convert Files to Base64
+
+on: [push]
+
+jobs:
+  convert_files:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Create Base64 Encoded Files
+        run: |
+          # Configure file type (e.g., .json, .png, .txt)
+          FILE_TYPE="*.lua"
+          OUTPUT_DIR="base64_encoded"
+          
+          # Create output directory
+          mkdir -p "$OUTPUT_DIR"
+          
+          # Find files, loop, convert to base64 without wrapping, and save
+          find . -name "$FILE_TYPE" -type f -not -path "*/.*" | while read file; do
+            filename=$(basename "$file")
+            echo "Converting $filename..."
+            base64 -w 0 "$file" > "$OUTPUT_DIR/$filename.b64"
+          done
+
+      - name: Archive Encoded Files
+        uses: actions/upload-artifact@v4
+        with:
+          name: encoded-files
+          path: base64_encoded/
