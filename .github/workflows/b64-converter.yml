@@ -5,6 +5,9 @@ on: [push]
 jobs:
   convert_files:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -30,3 +33,17 @@ jobs:
         with:
           name: encoded-files
           path: base64_encoded/
+
+      - name: Commit and Push Changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@://github.com"
+          
+          git add base64_encoded/
+          # Only commit if there are changes to avoid workflow errors
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "docs: auto-generate base64 encoded files"
+            git push
+          fi
