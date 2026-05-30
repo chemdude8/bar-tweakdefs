@@ -25,7 +25,8 @@ jobs:
           find . -name "$FILE_TYPE" -type f -not -path "*/.*" | while read file; do
             filename=$(basename "$file")
             echo "Converting $filename..."
-            base64 -w 0 "$file" > "$OUTPUT_DIR/$filename.b64"
+            base64 -w 0 "$file" | tr '+/' '-_' | tr -d '=' > "$OUTPUT_DIR/$filename.b64"
+            # base64 -w 0 "$file" > "$OUTPUT_DIR/$filename.b64"
           done
 
       - name: Archive Encoded Files
