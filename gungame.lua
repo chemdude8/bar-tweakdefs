@@ -1,4 +1,4 @@
--- gungame v1
+-- gungame v1.1
 -- no need to copy since I'm not making new unit types altogether UnitDefs.armflea = table.copy(UnitDefs.armpw)
 local evolveOrder = {{unitname= "armpw", evolvexpmod= 0.03},{unitname= "corstorm", evolvexpmod= 0.06}, {unitname= "armham", evolvexpmod= 0.09},
  {unitname= "legcen", evolvexpmod= 0.12},{unitname= "legbar", evolvexpmod= 0.15}, {unitname= "cormort", evolvexpmod= 0.18}, {unitname= "cortrem", evolvexpmod= 0.20},
