@@ -15,6 +15,8 @@ UnitDefs["legeheatraymech"].weapondefs["legflak_gun"].damage.vtol = 10000
 
 UnitDefs["legeheatraymech"].weapondefs["heatray1"].range = 10000
 UnitDefs["legeheatraymech"].weapondefs["heatray1"].energypershot = 0.1
+-- allows leaving the default game-ending so you don't have to set kill all
+UnitDefs["legeheatraymech"].customparams.iscommander = true
 
 
 local function unit(name)

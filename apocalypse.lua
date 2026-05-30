@@ -1,4 +1,4 @@
--- Apocalypse CommNukes V1
+-- Apocalypse CommNukes V1.1
 for name, unitDef in pairs(UnitDefs) do
         if name == 'armsilo' then
             unitDef.metalcost = 1
@@ -14,7 +14,7 @@ for name, unitDef in pairs(UnitDefs) do
             unitDef.energycost =1
             unitDef.buildtime  = 100
         end
-        if name == 'armcom' or name == 'corcom' then
+        if name == 'armcom' or name == 'corcom' or name =='legcom' then
             table.insert(unitDef.buildoptions, 'armsilo')
         end
 end
