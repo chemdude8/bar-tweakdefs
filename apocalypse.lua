@@ -1,4 +1,4 @@
--- Apocalypse CommNukes V1.1
+--ApocalypseCommNukes V1.1
 for name, unitDef in pairs(UnitDefs) do
         if name == 'armsilo' then
             unitDef.metalcost = 1

@@ -1,6 +1,6 @@
 -- gungame v1.1
 -- no need to copy since I'm not making new unit types altogether UnitDefs.armflea = table.copy(UnitDefs.armpw)
-local evolveOrder = {{unitname= "armpw", evolvexpmod= 0.03},{unitname= "corstorm", evolvexpmod= 0.06}, {unitname= "armham", evolvexpmod= 0.09},
+local evolveOrder = {{unitname= "armpw", evolvexpmod= 0.03},{unitname= "corstorm", evolvexpmod= 0.05}, {unitname= "armham", evolvexpmod= 0.09},
  {unitname= "legcen", evolvexpmod= 0.12},{unitname= "legbar", evolvexpmod= 0.15}, {unitname= "cormort", evolvexpmod= 0.18}, {unitname= "cortrem", evolvexpmod= 0.20},
  {unitname= "armsptk", evolvexpmod= 0.35}, {unitname= "legeheatraymech", evolvexpmod= 1}}
 local unitDef
@@ -12,9 +12,13 @@ UnitDefs["legeheatraymech"].radardistance=100000
 UnitDefs["legeheatraymech"].weapondefs["legflak_gun"].range = 10000
 UnitDefs["legeheatraymech"].weapondefs["legflak_gun"].reloadtime = 0.5
 UnitDefs["legeheatraymech"].weapondefs["legflak_gun"].damage.vtol = 10000
+UnitDefs["legeheatraymech"].weapondefs["legflak_gun"].damage.default = 10000
 
 UnitDefs["legeheatraymech"].weapondefs["heatray1"].range = 10000
 UnitDefs["legeheatraymech"].weapondefs["heatray1"].energypershot = 0.1
+UnitDefs["legeheatraymech"].weapondefs["heatray1"].damage.vtol = 10000
+UnitDefs["legeheatraymech"].weapondefs["heatray1"].damage.default = 10000
+UnitDefs["legeheatraymech"].weapons[3].badtargetcategory = "GROUNDSCOUT"
 -- allows leaving the default game-ending so you don't have to set kill all
 UnitDefs["legeheatraymech"].customparams.iscommander = true
 
@@ -86,8 +90,9 @@ for i=1 , #evolveOrder - 1 do
         unitDef.customparams.evolution_target = evolveOrder[i+1].unitname
         unitDef.customparams.evolution_condition = "xp"
 		unitDef.customparams.inheritxpratemultiplier = 0.0
-        -- may need to move the xp threshold into the unit list...
         unitDef.customparams.evolution_xp_threshold = evolveOrder[i].evolvexpmod
+		-- Used to immediately move through the states to the solInvictus for testing
+		-- unitDef.customparams.evolution_xp_threshold = 0
         unitDef.customparams.respawn_condition = "health"
 		-- try using one effigy as the effigy for all units?
 	    -- unitDef.customparams.effigy = "ggeff"
